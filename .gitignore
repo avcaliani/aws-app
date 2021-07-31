@@ -1,0 +1,6 @@
+# Dev Stuff
+.idea
+.vscode
+
+# OS
+.DS_Store
