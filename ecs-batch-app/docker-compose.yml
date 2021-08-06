@@ -1,0 +1,19 @@
+# This file is going to be used for development purpose only!
+version: '3'
+services:
+
+  airflow:
+    container_name: airflow
+    restart: always
+    build: ./airflow
+    image: airflow-dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./airflow/dags/:/airflow/dags/
+
+  chuck-norris:
+    container_name: chuck-norris
+    build: ./jobs/chuck-norris
+    image: chuck-norris-job
+    command: 'python /app/main.py -h'
