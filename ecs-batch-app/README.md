@@ -12,6 +12,7 @@ This is my AWS ECS Batch PoC.
 ### AWS
 ```bash
 # Bucket
+# TODO: Add Cloud Formation.
 aws s3api create-bucket \
   --bucket 'nth-dev-datalake' \
   --region 'us-east-1'
