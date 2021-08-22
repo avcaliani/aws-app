@@ -9,21 +9,19 @@ This is my AWS ECS Batch PoC.
 
 ## Quick Start
 
+```
+# TODO:
+ - DevOps: Basic Automation Scripts.
+ - Doc: Update + Add Screenshots.
+ - AWS: Clean Up
+```
+
 ### AWS
 ```bash
 # Bucket
-# TODO: Add Cloud Formation.
 aws s3api create-bucket \
   --bucket 'nth-dev-datalake' \
   --region 'us-east-1'
-
-# ECR
-aws ecr create-repository \
-  --repository-name 'nth-aws-app_chuck-norris' \
-  --region 'us-east-1'
-
-# ATTENTION!
-# Check push commands at AWS Console.
 ```
 
 ### Development Environment
@@ -32,7 +30,8 @@ aws ecr create-repository \
 # Virtual Env.
 python3 -m venv .venv \
   && source .venv/bin/activate \
-  && pip install -r jobs/chuck-norris/requirements.txt
+  && pip install -r jobs/chuck-norris/requirements.txt \
+  && pip install -r airflow/requirements.txt
 
 python jobs/chuck-norris/main.py -h
 ```
@@ -41,10 +40,21 @@ python jobs/chuck-norris/main.py -h
 # Docker
 docker-compose build \
   --build-arg ACCESS_KEY=$(cat ~/.aws/credentials | grep key_id | sed 's/.*key_id.*= //') \
-  --build-arg SECRET_KEY=$(cat ~/.aws/credentials | grep secret | sed 's/.*secret.*= //')
+  --build-arg SECRET_KEY=$(cat ~/.aws/credentials | grep secret | sed 's/.*secret.*= //') \
+  airflow
+  
+docker-compose build chuck-norris
+
+# [optional]
+docker scan nth/chuck-norris
+
+# ATTENTION!
+# Check push commands at AWS Console.
 
 # To change execution params, update "command" at 'docker-compose.yml'
 docker-compose up -d
+
+
 ```
 
 > After the execution check **your AWS bucket**.
