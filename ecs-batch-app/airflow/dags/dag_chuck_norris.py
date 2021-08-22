@@ -22,9 +22,8 @@ ARGS = {
 
 def ecs_template(
         command: List[str],
-        cluster: str = 'chuck-norris',
-        task_definition: str = 'chuck-norris',
-        container_name: str = 'chuck-norris_container') -> Dict[str, Any]:
+        app_name: str = 'chuck-norris',
+        container: str = 'main-container') -> Dict[str, Any]:
     """ECS Task Template.
 
     This method returns a dict that represents all configurations to be used in a ECS Task.
@@ -33,23 +32,23 @@ def ecs_template(
 
     About "chuck_norris_aws_config" variable. You have to configure the variable in Airflow using your own values.
     Here it is a variable value template for you:
-      { "region": "us-east-1", "subnet": "subnet-0x000", "security_group": "sg-0x000" }
+      { "env": "dev", "region": "us-east-1", "subnet": "subnet-0x000", "security_group": "sg-0x000" }
     See: https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html
 
     :param command: Container execution parameter.
-    :param cluster: ECS Cluster Name.
-    :param task_definition: ECS Task Definition name.
-    :param container_name: Container name defined at your Task Definition.
+    :param app_name: App Name is the Stack Name, without environment prefix.
+    :param container: Task Definition Container Name.
     :return:
         Dictionary with ECS Task configuration.
     """
     aws_config = Variable.get("chuck_norris_aws_config", deserialize_json=True)
+    stack = f'{aws_config["env"]}-{app_name}'
     return {
         'aws_conn_id': 'aws_default',
         'region_name': aws_config['region'],
         'launch_type': 'FARGATE',
-        'cluster': cluster,
-        'task_definition': task_definition,
+        'cluster': f'{stack}-cluster',
+        'task_definition': f'{stack}-task',
         'network_configuration': {
             'awsvpcConfiguration': {
                 'assignPublicIp': 'ENABLED',
@@ -57,12 +56,12 @@ def ecs_template(
                 'securityGroups': [aws_config['security_group']],
             }
         },
-        'awslogs_group': '/ecs/' + task_definition,
-        'awslogs_stream_prefix': 'ecs/' + container_name,
+        'awslogs_group': f'/ecs/log-group-{stack}',
+        'awslogs_stream_prefix': f'{app_name}/{container}',
         'overrides': {
             'containerOverrides': [
                 {
-                    'name': container_name,
+                    'name': container,
                     'memoryReservation': 128,
                     'command': command,
                 },
