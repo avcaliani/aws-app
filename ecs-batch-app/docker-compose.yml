@@ -15,5 +15,5 @@ services:
   chuck-norris:
     container_name: chuck-norris
     build: ./jobs/chuck-norris
-    image: chuck-norris-job
+    image: nth/chuck-norris
     command: 'python /app/main.py -h'

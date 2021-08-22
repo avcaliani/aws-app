@@ -21,8 +21,9 @@ def init_log():
 
 def init_session():
     return Session(
-        aws_access_key_id=environ.get('AWS_ACCESS_KEY_ID', ''),
-        aws_secret_access_key=environ.get('AWS_SECRET_ACCESS_KEY', ''),
+        aws_access_key_id=environ.get('AWS_ACCESS_KEY_ID'),
+        aws_secret_access_key=environ.get('AWS_SECRET_ACCESS_KEY'),
+        region_name=environ.get('AWS_REGION'),
     )
 
 
@@ -90,6 +91,7 @@ def exec_show(args):
 
 
 def main(args):
+    log.info(f'Env: {environ.get("APP_ENV", "unknown")}')
     log.info(f'Args: {args}')
     if args.pipeline.strip().lower() == 'extract':
         exec_extraction(args)
