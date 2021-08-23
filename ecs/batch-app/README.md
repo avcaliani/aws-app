@@ -37,24 +37,14 @@ python jobs/chuck-norris/main.py -h
 ```
 
 ```bash
-# Docker
-docker-compose build \
-  --build-arg ACCESS_KEY=$(cat ~/.aws/credentials | grep key_id | sed 's/.*key_id.*= //') \
-  --build-arg SECRET_KEY=$(cat ~/.aws/credentials | grep secret | sed 's/.*secret.*= //') \
-  airflow
-  
-docker-compose build chuck-norris
+# Building Docker Image  
+docker build -t nth/dev-chuck-norris .
 
-# [optional]
-docker scan nth/chuck-norris
+# [optional] Scanning our image to check vulnerabilities.
+docker scan nth/dev-chuck-norris
 
 # ATTENTION!
 # Check push commands at AWS Console.
-
-# To change execution params, update "command" at 'docker-compose.yml'
-docker-compose up -d
-
-
 ```
 
 > After the execution check **your AWS bucket**.

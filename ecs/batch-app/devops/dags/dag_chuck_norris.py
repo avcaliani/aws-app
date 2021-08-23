@@ -6,6 +6,8 @@ from airflow.models import Variable
 from airflow.operators.dummy import DummyOperator
 from airflow.providers.amazon.aws.operators.ecs import ECSOperator
 
+SCHEDULE = '@once'
+TAGS = ['ecs', 'batch', 'chuck-norris']
 ARGS = {
     'owner': 'anthony',
     'description': 'Chuck Norris Pipeline',
@@ -16,7 +18,6 @@ ARGS = {
     'email_on_retry': False,
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
-    'schedule_interval': '@once',
 }
 
 
@@ -30,7 +31,7 @@ def ecs_template(
     For more task options, check boto3 docs at:
       - https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html?highlight=run_task#ECS.Client.run_task
 
-    About "chuck_norris_aws_config" variable. You have to configure the variable in Airflow using your own values.
+    About "CHUCK_NORRIS_AWS_CONFIG" variable. You have to configure the variable in Airflow using your own values.
     Here it is a variable value template for you:
       { "env": "dev", "region": "us-east-1", "subnet": "subnet-0x000", "security_group": "sg-0x000" }
     See: https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html
@@ -41,7 +42,7 @@ def ecs_template(
     :return:
         Dictionary with ECS Task configuration.
     """
-    aws_config = Variable.get("chuck_norris_aws_config", deserialize_json=True)
+    aws_config = Variable.get("CHUCK_NORRIS_AWS_CONFIG", deserialize_json=True)
     stack = f'{aws_config["env"]}-{app_name}'
     return {
         'aws_conn_id': 'aws_default',
@@ -74,7 +75,7 @@ def ecs_template(
     }
 
 
-with DAG('chuck-norris', default_args=ARGS, catchup=False) as dag:
+with DAG('dag-chuck-norris', schedule_interval=SCHEDULE, default_args=ARGS, catchup=False, tags=TAGS) as dag:
     app_initialize = DummyOperator(
         task_id='start'
     )

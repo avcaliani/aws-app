@@ -11,3 +11,4 @@ ADD *.txt .
 RUN pip install -q -r requirements.txt
 
 # Execution command should be defined on the fly ;)
+CMD [ "python", "/app/main.py", "-h" ]
