@@ -6,10 +6,9 @@ By Anthony Vilarim Caliani
 ## Quick Start
 
 ```bash
-python3.9 -m venv .venv \
+python -m venv .venv \
     && source .venv/bin/activate \
-    && pip install -r requirements.txt \
-    && python main.py
+    && pip install -r requirements.txt
 ```
 
 ## AWS
@@ -20,7 +19,7 @@ aws s3api create-bucket \
      --region 'us-east-1'
      
 # Copying our dataset to S3
-aws s3 cp data/input/ s3://nth-dev-datalake/raw/users/ --recursive
+aws s3 cp data/raw/users s3://nth-dev-datalake/raw/users/ --recursive
 
 # Copying our script to S3
 aws s3 cp main.py s3://nth-dev-datalake/jobs/aws-emr-app/
@@ -29,6 +28,12 @@ aws s3 cp main.py s3://nth-dev-datalake/jobs/aws-emr-app/
 aws s3 ls s3://nth-dev-datalake/
 
 # TODO: Create Cluster
+
+```
+
+```bash
+spark-submit --master local main.py trusted --date 2021-04-09 --bucket data
+spark-submit --master local main.py refined --bucket data
 
 ```
 
