@@ -1,6 +1,8 @@
 # Dev Stuff
 .idea
 .vscode
+
+# Generated Data
 *.parquet
 *.crc
 _SUCCESS
