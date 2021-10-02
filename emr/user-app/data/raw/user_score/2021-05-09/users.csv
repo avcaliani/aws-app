@@ -1,0 +1,4 @@
+user_id,name,email,score,description,updated_at
+1,anthony,anthony@github.com,8.5,Non modified record,2021-05-08 00:00:00
+2,nina,nina@github.com,9.0,Updated record,2021-05-09 00:00:01
+4,book,book@github.com,10.0,New record,2021-05-09 00:00:00

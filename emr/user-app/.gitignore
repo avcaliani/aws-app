@@ -3,6 +3,7 @@
 .vscode
 
 # Generated Data
+data/trusted/
 *.parquet
 *.crc
 _SUCCESS
