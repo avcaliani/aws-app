@@ -3,7 +3,7 @@ from contextlib import contextmanager
 
 from pyspark.sql import SparkSession
 
-from src.pipelines import trusted, refined
+from src.pipelines import trusted
 from src.utils import Timer
 from src.utils import log
 
@@ -29,8 +29,6 @@ def run(spark: SparkSession, args: Namespace) -> None:
     pipeline = args.pipeline.upper()
     if 'TRUSTED' == pipeline:
         trusted.run(spark, dt_partition=args.dt_partition, bucket=args.bucket)
-    elif 'REFINED' == pipeline:
-        refined.run(spark, bucket=args.bucket)
     else:
         raise RuntimeError(f'Pipeline "{pipeline}" does not exist!')
 
