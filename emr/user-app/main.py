@@ -41,6 +41,7 @@ def main() -> None:
     args, timer = get_args(), Timer()
     with spark_session(args.pipeline) as spark:
         log.info(f'[APP] Args: {args}')
+        log.info(f'[APP] Spark Version: {spark.version}')
         run(spark, args)
         log.info(f'[APP] Elapsed Time: {timer.stop()}')
 

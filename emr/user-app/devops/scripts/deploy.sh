@@ -5,7 +5,7 @@
 APP_VERSION=${1:?'App version not informed!'}
 APP_REPLACE=${2:-'no'}
 
-DEPLOY_PATH="s3://nth-dev-datalake/jobs/batch-app/$APP_VERSION"
+DEPLOY_PATH="s3://nth-dev-datalake/jobs/batch-app/$APP_VERSION/"
 DIST='./dist'
 
 # Project Root
@@ -19,7 +19,7 @@ cp "main.py" "$DIST"
 
 version_exists="$(aws s3 ls "$DEPLOY_PATH" || echo '')"
 if [ -n "$version_exists" ] && [ "$APP_REPLACE" = 'no' ]; then
-  echo "Version $APP_VERSION already exists!"
+  printf "\033[1;31m%s\033[00m\n" "Version $APP_VERSION already exists!"
   cd - && exit 1
 fi
 
