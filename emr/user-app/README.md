@@ -2,9 +2,11 @@
 
 By Anthony Vilarim Caliani
 
-![#](https://img.shields.io/badge/licence-MIT-lightseagreen.svg) ![#](https://img.shields.io/badge/python-3.9.x-yellow.svg)
+![License](https://img.shields.io/github/license/avcaliani/aws-app?logo=apache&color=lightseagreen) ![#](https://img.shields.io/badge/python-3.9.x-yellow.svg)
 
 Spark Batch application with Apache Hudi.
+
+![dag](.docs/dag-diagram.png)
 
 ## Quick Start
 
