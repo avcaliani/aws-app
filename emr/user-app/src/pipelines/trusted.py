@@ -8,19 +8,13 @@ from src.utils import log
 HUDI_TABLE = 'user_score'
 HUDI_KEY_COL = 'user_id'
 HUDI_INCREMENT_COL = 'updated_at'
-HUDI_PARTITION_COL = HUDI_KEY_COL  # 'yy_mm'
 
 
 def _read(spark, bucket, exec_date):
     log.info('=~=~=~=~=~=~=~=~=~= READ =~=~=~=~=~=~=~=~=~=')
     path = constants.get('raw_path').format(bucket, exec_date)
     log.info(f'File: {path}')
-    df = spark.read \
-        .option('header', True) \
-        .option('inferSchema', True) \
-        .option('sep', ',') \
-        .csv(path) \
-        .cache()
+    df = spark.read.json(path).cache()
     log.info(f'Records: {df.count()}')
     df.printSchema()
     return df
@@ -32,8 +26,7 @@ def _write(df, bucket, overwrite):
     hudi_opts = constants.hudi_options(
         table=HUDI_TABLE,
         key_col=HUDI_KEY_COL,
-        increment_col=HUDI_INCREMENT_COL,
-        partition_col=HUDI_PARTITION_COL
+        increment_col=HUDI_INCREMENT_COL
     )
     log.info(f'File: {path}')
     log.info(f'Overwrite: {overwrite}')
