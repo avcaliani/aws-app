@@ -11,3 +11,4 @@ services:
       - "8080:8080"
     volumes:
       - ./ecs/batch-app/devops/dags:/airflow/dags/chuck-norris
+      - ./emr/user-app/devops/dags:/airflow/dags/user-app
