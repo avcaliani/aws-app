@@ -1,3 +1,4 @@
+import platform
 from argparse import ArgumentParser, Namespace
 from contextlib import contextmanager
 
@@ -42,6 +43,7 @@ def main() -> None:
     with spark_session(args.pipeline) as spark:
         log.info(f'[APP] Args: {args}')
         log.info(f'[APP] Spark Version: {spark.version}')
+        log.info(f'[APP] Python Version.: {platform.python_version()}')
         run(spark, args)
         log.info(f'[APP] Elapsed Time: {timer.stop()}')
 
