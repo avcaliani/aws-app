@@ -5,7 +5,7 @@
 APP_VERSION=${1:?'App version not informed!'}
 APP_REPLACE=${2:-'no'}
 
-DEPLOY_PATH="s3://nth-dev-datalake/jobs/batch-app/$APP_VERSION/"
+DEPLOY_PATH="s3://nth-dev-datalake/jobs/user-app/$APP_VERSION/"
 DIST='./dist'
 
 # Project Root
