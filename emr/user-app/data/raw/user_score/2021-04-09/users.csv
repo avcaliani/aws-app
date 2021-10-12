@@ -1,5 +1,0 @@
-user_id,name,email,score,description,updated_at
-1,anthony,anthony@github.com,7,First Record,2021-04-09 00:00:00
-1,anthony,anthony@github.com,6.5,Duplicated Record,2021-04-09 00:00:01
-2,nina,nina@github.com,10,First Record,2021-04-09 00:00:00
-3,joe,joe@github.com,9.5,First Record,2021-04-09 00:00:00

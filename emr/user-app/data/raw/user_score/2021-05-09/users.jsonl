@@ -1,0 +1,3 @@
+{ "user_id":1,"name":"anthony","email":"anthony@github.com","score":8.5,"description":"Non modified record","updated_at":"2021-05-08 00:00:00" }
+{ "user_id":2,"name":"nina","email":"nina@github.com","score":9,"description":"Updated record","updated_at":"2021-05-09 00:00:01" }
+{ "user_id":4,"name":"book","email":"book@github.com","score":10,"description":"New record","updated_at":"2021-05-09 00:00:00" }

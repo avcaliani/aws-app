@@ -1,0 +1,4 @@
+{ "user_id": 1, "name": "anthony,anthony@github.com", "score": 7, "description": "First Record", "updated_at": "2021-04-09 00:00:00" }
+{ "user_id": 1, "name": "anthony,anthony@github.com", "score": 6.5, "description": "Duplicated Record", "updated_at": "2021-04-09 00:00:01" }
+{ "user_id": 2, "name": "nina,nina@github.com", "score": 10, "description": "First Record", "updated_at": "2021-04-09 00:00:00" }
+{ "user_id": 3, "name": "joe,joe@github.com", "score": 9.5, "description": "First Record", "updated_at": "2021-04-09 00:00:00" }
