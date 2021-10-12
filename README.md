@@ -1,8 +1,8 @@
-<img src=".docs/logo.png" width="128px" align="right"/>
+<img src=".docs/logo.png" width="96px" align="right"/>
 
 # AWS App
 
-![#](https://img.shields.io/badge/licence-MIT-lightseagreen.svg)
+![License](https://img.shields.io/github/license/avcaliani/aws-app?logo=apache&color=lightseagreen)
 
 
 Here you will find some PoCs that I've developed using AWS.
