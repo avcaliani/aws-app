@@ -6,8 +6,8 @@ __LOCAL = {
 }
 
 __AWS = {
-    'raw_path': 's3a://{}/raw/user_score',
-    'trusted_path': 's3a://{}/trusted/user_score'
+    'raw_path': 's3://{}/raw/user_score/{}',
+    'trusted_path': 's3://{}/trusted/user_score'
 }
 
 
@@ -22,14 +22,13 @@ def get(key):
         raise RuntimeError(f'Environment "{env}" not found! Valid envs: local, aws')
 
 
-def hudi_options(table, key_col, increment_col, partition_col):
+def hudi_options(table, key_col, increment_col, partition_col = ''):
     return {
         'hoodie.table.name': table,
         'hoodie.datasource.write.recordkey.field': key_col,
         # The partition path is not required, BUT! BE CAREFUL!
         # I found some interesting Hudi behaviors because of this field.
-        #  1 - When you don't specify a partition field a "default"
-        #      directory will be created inside the path you pass.
+        #  1 - To not create partition, specify the partition col as ''
         #  2 - In my case, I want a single record for each user.
         #      When I defined as partition field a field with year and month
         #      I found the SAME USER in DIFFERENT PARTITIONS. To solve this
